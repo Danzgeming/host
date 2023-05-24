@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indonesia Driving Roads Official Website</title>
+    <style>
+        /* Gaya-gaya sebelumnya */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+
+            header .menu-icon {
+                display: none;
+                cursor: pointer;
+            }
+
+                header .menu-icon span,
+                header .menu-icon span:before,
+                header .menu-icon span:after {
+                    display: block;
+                    background-color: #fff;
+                    height: 3px;
+                    width: 25px;
+                    border-radius: 3px;
+                    position: relative;
+                    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+                }
+
+                    header .menu-icon span:before,
+                    header .menu-icon span:after {
+                        content: "";
+                        position: absolute;
+                    }
+
+                    header .menu-icon span:before {
+                        top: -8px;
+                    }
+
+                    header .menu-icon span:after {
+                        top: 8px;
+                    }
+
+                header .menu-icon.active span {
+                    background-color: transparent;
+                }
+
+                    header .menu-icon.active span:before {
+                        top: 0;
+                        transform: rotate(45deg);
+                    }
+
+                    header .menu-icon.active span:after {
+                        top: 0;
+                        transform: rotate(-45deg);
+                    }
+
+            header .menu {
+                display: flex;
+                align-items: center;
+            }
+
+                header .menu a {
+                    display: inline-block;
+                    margin-right: 10px;
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+            form input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+        .info {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+            .info h3 {
+                margin: 0;
+            }
+
+            .info p {
+                margin-top: 10px;
+            }
+
+        .logout {
+            text-align: right;
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .create-account a {
+                color: #333;
+            }
+
+        .login-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .login-btn button {
+                padding: 10px 20px;
+            }
+
+        .contact {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .contact h2 {
+                margin-bottom: 10px;
+            }
+
+            .contact p {
+                margin: 0;
+            }
+
+        /* Gaya tambahan untuk menyembunyikan kontak person saat login */
+        .hidden {
+            display: none;
+        }
+
+        .menu {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .menu a {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+        /* Gaya untuk tampilan layar kecil */
+        @media screen and (max-width: 600px) {
+            header .menu {
+                display: none;
+            }
+
+            header .menu-icon {
+                display: block;
+            }
+
+            .menu-section.active .menu {
+                display: block;
+            }
+
+            .menu-section {
+                position: relative;
+            }
+
+                .menu-section .menu {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: #333;
+                    width: 100%;
+                    padding: 10px 0;
+                    text-align: center;
+                    display: none;
+                }
+
+                    .menu-section .menu a {
+                        display: block;
+                        margin-bottom: 10px;
+                    }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="menu-section">
+            <div class="menu-icon" id="menuIcon">
+                <span></span>
+            </div>
+            <div class="menu">
+                <a href="#" id="aboutGameLink">Main</a>
+                <a href="#" id="contactLink">Contact Person</a>
+            </div>
+        </div>
+        <h1>Indonesia Driving Roads Official Website</h1>
+        <div class="logout" id="logoutContainer" style="display: none;">
+            <a href="#" id="logout">Log out</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <form id="registerForm">
+            <h2>Register (Please refresh page if you have an account)</h2>
+            <input type="text" id="newUsername" placeholder="Username" required>
+            <input type="password" id="newPassword" placeholder="Password" required>
+            <button type="submit">Sumbit</button>
+        </form>
+
+        <form id="loginForm" style="display: none;">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Sumbit</button>
+        </form>
+
+        <div class="info" id="gameInfo" style="display: none;">
+            <h2>Main Menu</h2>
+            <p>Hello everyone, welcome to our official Indonesia Driving Roads.</p>
+            <p>This website will notify you of the latest updates from the IDDR game and announcements of applicants staff/developers.</p>
+            <p>If you need help, you can contact us.</p>
+            <h2>Whats New?</h2>
+            <p>- Updated ui</p>
+            <p>- Optimized graphic</p>
+            <p>- Render rage (above lag)</p>
+            <h2>Applicants Information</h2>
+            <p>Sorry, applicants is closed for now!, You can try next time</p>
+            <h2>Join our Official Discord IDDR!</h2>
+            <p>Discord: <a href="https://dsc.gg/csds">Join here!</a></p>
+        </div>
+
+        <div class="contact hidden">
+            <h2>Contact Person</h2>
+            <p>Name: <a href="mailto:adjiari97@gmail.com">iSand</a></p>
+            <p>Email: <a href="mailto:adjiari97@gmail.com">adjiari97@gmail.com</a></p>
+            <p>Phone: <a href="tel:628-951-448-8699">628-951-448-8699</a></p>
+        </div>
+    </div>
+
+    <div class="create-account" id="createAccount" style="display: none;">
+        <p>Doesn't have an account? <a href="#" id="createAccountLink">Create one</a></p>
+    </div>
+
+    <div class="login-btn" id="loginButton" style="display: none;">
+        <button id="login">Login</button>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const gameInfo = document.getElementById('gameInfo');
+        const logoutContainer = document.getElementById('logoutContainer');
+        const logoutLink = document.getElementById('logout');
+        const createAccountLink = document.getElementById('createAccountLink');
+        const loginButton = document.getElementById('login');
+        const createAccountSection = document.getElementById('createAccount');
+        const contactSection = document.querySelector('.contact');
+        const menuSection = document.querySelector('.menu-section');
+        const menuIcon = document.getElementById('menuIcon');
+        const menu = document.querySelector('.menu');
+        const aboutGameLink = document.getElementById('aboutGameLink');
+        const contactLink = document.getElementById('contactLink');
+        let registeredUsers = [];
+
+        // Cek apakah ada data pendaftaran di LocalStorage saat halaman dimuat
+        if (localStorage.getItem('registeredUsers')) {
+            registeredUsers = JSON.parse(localStorage.getItem('registeredUsers'));
+        }
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            // Simulasi pendaftaran
+            const user = registeredUsers.find(u => u.username === newUsername);
+            if (user) {
+                alert('Username is already taken. Please choose a different username.');
+            } else {
+                registeredUsers.push({ username: newUsername, password: newPassword });
+                localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+                alert('Registration successful! You can now login with your new account.');
+                clearRegisterForm();
+                showLoginForm();
+            }
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Verifikasi username dan password
+            const user = registeredUsers.find(u => u.username === username && u.password === password);
+            if (user) {
+                showMainMenu();
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        });
+
+        logoutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+
+        createAccountLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterForm();
+        });
+
+        aboutGameLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showGameInfo();
+        });
+
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showContact();
+        });
+
+        loginButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+
+        menuIcon.addEventListener('click', (e) => {
+            menuSection.classList.toggle('active');
+        });
+
+        // Cek apakah ada pengguna yang telah login sebelumnya
+        if (localStorage.getItem('loggedInUser')) {
+            showMainMenu();
+        } else {
+            showLoginForm();
+        }
+
+        function showLoginForm() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            createAccountSection.style.display = 'block';
+            loginButton.style.display = 'none';
+            gameInfo.style.display = 'none'; // Menyembunyikan halaman info game saat log in form ditampilkan
+            contactSection.classList.add('hidden'); // Menyembunyikan kontak person saat login form ditampilkan
+            menuSection.style.display = 'none'; // Menyembunyikan menu saat login form ditampilkan
+        }
+
+        function showRegisterForm() {
+            registerForm.style.display = 'block';
+            loginForm.style.display = 'none';
+            createAccountSection.style.display = 'none';
+            loginButton.style.display = 'block';
+            gameInfo.style.display = 'none'; // Menyembunyikan halaman info game saat register form ditampilkan
+            contactSection.classList.add('hidden'); // Menyembunyikan kontak person saat register form ditampilkan
+            menuSection.style.display = 'none'; // Menyembunyikan menu saat register form ditampilkan
+        }
+
+        function showMainMenu() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'none';
+            createAccountSection.style.display = 'none';
+            loginButton.style.display = 'none';
+            gameInfo.style.display = 'block';
+            logoutContainer.style.display = 'block';
+            contactSection.classList.add('hidden'); // Menyembunyikan kontak person saat main menu ditampilkan
+            menuSection.style.display = 'block'; // Menampilkan menu saat main menu ditampilkan
+        }
+
+        function showGameInfo() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'none';
+            createAccountSection.style.display = 'none';
+            loginButton.style.display = 'none';
+            gameInfo.style.display = 'block';
+            logoutContainer.style.display = 'none';
+            contactSection.classList.add('hidden'); // Menyembunyikan kontak person saat info game ditampilkan
+            menuSection.style.display = 'block'; // Menampilkan menu saat info game ditampilkan
+        }
+
+        function showContact() {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'none';
+            createAccountSection.style.display = 'none';
+            loginButton.style.display = 'none';
+            gameInfo.style.display = 'none';
+            logoutContainer.style.display = 'block';
+            contactSection.classList.remove('hidden'); // Menampilkan kontak person saat contact section ditampilkan
+            menuSection.style.display = 'block'; // Menampilkan menu saat contact section ditampilkan
+        }
+
+        function clearRegisterForm() {
+            document.getElementById('newUsername').value = '';
+            document.getElementById('newPassword').value = '';
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            showLoginForm();
+        }
+    </script>
+</body>
+
+</html>
